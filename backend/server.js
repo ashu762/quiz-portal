@@ -19,9 +19,10 @@ app.use("/api/quiz", quizRoutes);
 app.use("/api/question", questionRoutes);
 app.use("/api/users/", userRoutes);
 app.use(errorHandler);
-app.use(notFound);
+// app.use(notFound);
 
 const __dirname = path.resolve();
+console.log(__dirname);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/quizmaker/build")));
   app.get("*", (req, res) =>

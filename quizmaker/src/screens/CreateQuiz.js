@@ -50,7 +50,9 @@ const CreateQuiz = ({ history }) => {
   ) : (
     <div className="login-form">
       <FormContainer>
-        <h1 className="d-flex justify-content-center login ">Create Quiz</h1>
+        <h1 className="d-flex justify-content-center login ">
+          Create Your Quiz
+        </h1>
         {error && <Message variant="danger">{error}</Message>}
         {message && <Message variant="danger">{message}</Message>}
 
