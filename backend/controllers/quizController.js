@@ -7,7 +7,14 @@ import asyncHandler from "express-async-handler";
 // @access public
 export const postQuiz = asyncHandler(async (req, res) => {
   const { name, author, user, description } = req.body;
-  const quiz = await Quiz.create({ name, author, user, description });
+  const createdAt = Date.now();
+  const quiz = await Quiz.create({
+    name,
+    author,
+    user,
+    description,
+    createdAt,
+  });
   if (quiz) {
     res.status(200).json({
       name: quiz.name,
@@ -15,6 +22,7 @@ export const postQuiz = asyncHandler(async (req, res) => {
       author: quiz.author,
       id: quiz._id,
       description: quiz.description,
+      createdAt: quiz.createdAt,
     });
   } else {
     res.status(400);

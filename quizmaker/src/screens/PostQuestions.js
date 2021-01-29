@@ -18,6 +18,13 @@ const PostQuestions = ({ history }) => {
   const questionCreate = useSelector((state) => state.questionCreate);
   const { error, loading, questionInfo } = questionCreate;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+  }, [userInfo]);
   useEffect(() => {
     if (questionInfo) {
       console.log("Question Submitted");

@@ -1,19 +1,20 @@
-/* * {
+* {
   font-family: lato;
-  background-color: black;
-  color: white;
   box-sizing: border-box;
   margin: 0px;
-} */
+  padding: 0px;
+}
 
 .red {
-  background-color: rgba(255, 0, 0, 0.644);
+  background-color: rgb(238, 45, 45);
   cursor: default;
+  color: white;
   border: none;
 }
 .green {
-  background-color: rgba(88, 233, 88, 0.575);
+  background-color: rgba(139, 195, 74, 1);
   cursor: default;
+  color: white;
   border-width: 0px;
 }
 .question {
@@ -73,12 +74,50 @@ button {
 
 .checked {
   text-align: center;
+  line-height: 4.2rem;
 }
 .check-container {
-  font-size: 1rem;
+  font-size: 0.7rem;
   border-radius: 200px;
-  width: 100px;
-  height: 100px;
+  width: 4.2rem;
+  height: 4.2rem;
   border: 1px solid red;
   margin: 10px 20px;
+  cursor: pointer;
+}
+.buttons {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+.prev {
+  margin-right: 2rem;
+  cursor: pointer;
+  padding: 0.4rem 2rem;
+  font-size: 1rem;
+  background-color: rgb(153, 23, 114);
+  color: white;
+  text-align: center;
+  vertical-align: center;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+/* .next {
+  margin-left: 2rem;
+  font-size: 1rem;
+} */
+
+.green-check {
+  color: white;
+  background-color: green;
+}
+.unchecked {
+  background-color: rgba(219, 201, 201, 0.76);
+}
+.red-check {
+  color: white;
+  background-color: rgb(238, 45, 45);
 }

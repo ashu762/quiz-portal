@@ -18,6 +18,10 @@ const quizSchema = mongoose.Schema({
     type: String,
     default: "It is a Quiz",
   },
+  createdAt: {
+    type: String,
+    default: Date.now(),
+  },
 });
 const Quiz = mongoose.model("Quiz", quizSchema);
 export default Quiz;

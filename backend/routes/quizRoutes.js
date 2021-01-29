@@ -7,8 +7,7 @@ import {
   getQuizByUser,
   getAllQuiz,
 } from "../controllers/quizController.js";
-router.route("/").post(protect, postQuiz);
-router.get("/", getAllQuiz);
-router.get("/:id", getQuizById);
-router.get("/users/:id", getQuizByUser);
+router.route("/").post(protect, postQuiz).get(protect, getAllQuiz);
+router.route("/:id").get(protect, getQuizById);
+router.route("/users/:id").get(protect, getQuizByUser);
 export default router;

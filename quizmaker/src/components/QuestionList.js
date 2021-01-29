@@ -6,7 +6,7 @@ import Question from "./Question";
 import Message from "../components/Message";
 import Loaders from "./Loaders";
 import { listQuestions } from "../actions/quizActions";
-const QuestionList = ({ id }) => {
+const QuestionList = ({ id, history }) => {
   const [score, setScore] = useState(0);
   const [checked, setChecked] = useState([]);
   const [questionLength, setQuestionLength] = useState(-1);
@@ -15,6 +15,13 @@ const QuestionList = ({ id }) => {
   const { loading, error, questions } = questionList;
   const [clicked, setClicked] = useState([]);
   const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+  }, [userInfo]);
   useEffect(() => {
     console.log(id);
     dispatch(listQuestions(id));
@@ -46,8 +53,10 @@ const QuestionList = ({ id }) => {
               setChecked={setChecked}
               clicked={clicked}
               setClicked={setClicked}
+              questionLength={questionLength}
             />
           </div>
+
           <div className="line"></div>
           <div className="quiz-details">
             <div>{score}</div>

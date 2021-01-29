@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
 }
 /* .a {
   background-color: red;
@@ -35,7 +37,7 @@
   border-radius: 5px;
   margin: 2rem;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 18rem;
   height: 20rem;
   color: white;
@@ -78,6 +80,15 @@
 .quiz-description {
   font-size: 0.8rem;
 }
+
+.quiz-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
 /* .quiz:hover {
   box-shadow: 10px 2px 5px black;
 } */

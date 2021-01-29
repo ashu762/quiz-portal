@@ -10,15 +10,36 @@ const CreateQuiz = ({ history }) => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
+  const [message, setMessage] = useState();
   const dispatch = useDispatch();
   const quizCreate = useSelector((state) => state.quizCreate);
   const { error, loading, quizInfo } = quizCreate;
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login");
+    }
+  }, [userInfo]);
   useEffect(() => {
     if (quizInfo) history.push(`/create/${quizInfo.id}`);
   }, [quizInfo]);
+
   const submitform = (e) => {
     e.preventDefault();
+
+    if (name.length === 0) {
+      setMessage("Please Enter A valid Quiz name!!");
+      return;
+    }
+    if (author.length === 0) {
+      setMessage("Please Enter A valid Author name!!");
+      return;
+    }
+    if (description.length < 30) {
+      setMessage("Please Enter A Description of more than 30 characters!!");
+      return;
+    }
     dispatch(postQuiz(name, author, description));
   };
   console.log(quizInfo);
@@ -31,13 +52,15 @@ const CreateQuiz = ({ history }) => {
       <FormContainer>
         <h1 className="d-flex justify-content-center login ">Create Quiz</h1>
         {error && <Message variant="danger">{error}</Message>}
+        {message && <Message variant="danger">{message}</Message>}
+
         {loading && <Loaders />}
         <Form onSubmit={submitform} className="d-flex flex-column">
           <Form.Group controlId="name">
-            <Form.Label>name</Form.Label>
+            <Form.Label>Quiz Name</Form.Label>
             <Form.Control
               type="name"
-              placeholder="Enter email"
+              placeholder="Enter Quiz Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             ></Form.Control>

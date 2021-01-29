@@ -17,10 +17,21 @@ import {
   MYQUIZ_LIST_SUCCESS,
 } from "../constants/quizConstants";
 import axios from "axios";
-export const listQuiz = (id) => async (dispatch) => {
+export const listQuiz = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: QUIZ_LIST_REQUEST });
-    const data = await axios.get("/api/quiz");
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    if (!userInfo) {
+      throw new Error("Please Log In to Continue the process");
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const data = await axios.get("/api/quiz", config);
 
     dispatch({
       type: QUIZ_LIST_SUCCESS,
@@ -43,7 +54,15 @@ export const myListQuiz = () => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-    const data = await axios.get(`/api/quiz/users/${userInfo._id}`);
+    if (!userInfo) {
+      throw new Error("Please Log In to Continue the process");
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const data = await axios.get(`/api/quiz/users/${userInfo._id}`, config);
 
     dispatch({
       type: MYQUIZ_LIST_SUCCESS,
@@ -60,10 +79,22 @@ export const myListQuiz = () => async (dispatch, getState) => {
   }
 };
 
-export const listQuestions = (id) => async (dispatch) => {
+export const listQuestions = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: QUESTION_LIST_REQUEST });
-    const data = await axios.get(`/api/quiz/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    if (!userInfo) {
+      throw new Error("Please Log In to Continue the process");
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const data = await axios.get(`/api/quiz/${id}`, config);
+
     dispatch({
       type: QUESTION_LIST_SUCCESS,
       payload: data,
@@ -125,14 +156,19 @@ export const postQuestion = (question, correctOption, options) => async (
 ) => {
   try {
     dispatch({ type: QUESTION_CREATE_REQUEST });
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+
     const {
       userLogin: { userInfo },
     } = getState();
+    if (!userInfo) {
+      throw new Error("Please Log In to Continue the process");
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        "Content-Type": "application/json",
+      },
+    };
     const {
       quizCreate: { quizInfo },
     } = getState();
