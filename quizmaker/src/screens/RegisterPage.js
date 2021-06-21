@@ -86,7 +86,7 @@ const RegisterPage = ({ history }) => {
 
         <div className="d-flex justify-content-center mt-4">
           Already Have an account
-          <a href="#" className="ml-3">
+          <a href="/login" className="ml-3">
             Login
           </a>
         </div>
