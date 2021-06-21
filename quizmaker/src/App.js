@@ -22,7 +22,7 @@ function App() {
           <Route path="/home" component={HomeScreen} exact></Route>
           <Route path="/create" component={CreateQuiz} exact></Route>
           <Route path="/create/:id" component={PostQuestions} exact></Route>
-          <Route path="/quiz/:id" component={QuizPage}></Route>
+          <Route path="/quiz/:id" component={QuizPage} exact></Route>
           <Route path="/myquiz" component={MyQuiz}></Route>
           <Route path="/" component={NotFound}></Route>
         </Switch>

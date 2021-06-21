@@ -15,6 +15,9 @@ import {
   MYQUIZ_LIST_FAIL,
   MYQUIZ_LIST_REQUEST,
   MYQUIZ_LIST_SUCCESS,
+  QUIZ_DELETE_FAIL,
+  QUIZ_DELETE_REQUEST,
+  QUIZ_DELETE_SUCCESS,
 } from "../constants/quizConstants";
 
 export const quizListReducer = (state = { quiz: [] }, action) => {
@@ -79,6 +82,19 @@ export const questionCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case QUESTION_CLEAR:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const quizDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case QUIZ_DELETE_REQUEST:
+      return { loading: true };
+    case QUIZ_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case QUIZ_CREATE_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

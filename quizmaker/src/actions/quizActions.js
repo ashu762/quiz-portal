@@ -15,6 +15,9 @@ import {
   MYQUIZ_LIST_FAIL,
   MYQUIZ_LIST_REQUEST,
   MYQUIZ_LIST_SUCCESS,
+  QUIZ_DELETE_REQUEST,
+  QUIZ_DELETE_FAIL,
+  QUIZ_DELETE_SUCCESS,
 } from "../constants/quizConstants";
 import axios from "axios";
 export const listQuiz = (id) => async (dispatch, getState) => {
@@ -187,6 +190,41 @@ export const postQuestion = (question, correctOption, options) => async (
   } catch (error) {
     dispatch({
       type: QUESTION_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteMyQuiz = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: QUIZ_DELETE_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    if (!userInfo) {
+      throw new Error("Please Log In to Continue the process");
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        "Content-Type": "application/json",
+      },
+    };
+    // const {
+    //   quizCreate: { quizInfo },
+    // } = getState();
+    console.log(id);
+
+    const data = await axios.get(`/api/quiz/delete/${id}`, config);
+    console.log(data);
+    dispatch({ type: QUIZ_DELETE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: QUIZ_DELETE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

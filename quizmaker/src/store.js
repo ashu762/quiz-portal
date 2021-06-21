@@ -8,6 +8,7 @@ import {
   quizCreateReducer,
   questionCreateReducer,
   MyQuizListReducer,
+  quizDeleteReducer,
 } from "./reducers/quizReducers";
 const middleware = [thunk];
 
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   quizCreate: quizCreateReducer,
   questionCreate: questionCreateReducer,
   myQuizList: MyQuizListReducer,
+  deleteQuiz: quizDeleteReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

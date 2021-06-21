@@ -48,7 +48,6 @@ export const getQuizById = asyncHandler(async (req, res) => {
 // @access public
 export const getQuizByUser = asyncHandler(async (req, res) => {
   const quizzes = await Quiz.find({ user: req.params.id });
-  console.log(quizzes);
   if (quizzes) {
     res.status(200).json(quizzes);
   } else {
@@ -64,5 +63,18 @@ export const getAllQuiz = asyncHandler(async (req, res) => {
   } else {
     res.status(400);
     throw new Error("Quiz Not found!!");
+  }
+});
+
+export const deleteQuiz = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const quiz = await Quiz.findByIdAndDelete(id);
+  const question = await Question.deleteMany({ quizName: id });
+  if (quiz) {
+    res.status(200).json({ success: true });
+  } else {
+    res.status(400);
+    throw new Error("An error occured while deleting the quiz");
   }
 });

@@ -124,3 +124,16 @@
   display: flex;
   justify-content: center;
 }
+
+.deleteQuiz {
+  cursor: pointer;
+  background-color: rgb(245, 32, 32);
+  margin-left: 4rem;
+  margin-right: 4rem;
+  padding: 5px 12px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import "../App.css";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Route,
+  BrowserRouter as Router,
+} from "react-router-dom";
+import Result from "./Result";
 const Question = ({
   question,
   score,
@@ -12,8 +18,8 @@ const Question = ({
   clicked,
   setClicked,
   questionLength,
+  history,
 }) => {
-  console.log(question);
   const setClickhandler = (index) => {
     if (clicked[indexNum]) return;
     setClicked(
@@ -65,11 +71,15 @@ const Question = ({
             </div>
           )}
           {indexNum === questionLength - 1 ? (
-            <div>
-              <Link to={`/quiz/result`} className="prev link">
-                See results
+            <Router>
+              <Link to="/quiz/result">
+                <div className="prev link">See results</div>
               </Link>
-            </div>
+              <Route
+                path="/quiz/result"
+                render={() => <Result></Result>}
+              ></Route>
+            </Router>
           ) : (
             <div onClick={() => setIndex(indexNum + 1)} className="prev">
               next

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import QuizComponent from "../components/QuizComponent";
+import MyQuizComponent from "../components/MyQuizComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { myListQuiz } from "../actions/quizActions";
 import Message from "../components/Message";
 import Loaders from "../components/Loaders";
 import "../index.css";
+import { Alert } from "react-bootstrap";
 const MyQuiz = () => {
   const dispatch = useDispatch();
   const myQuizList = useSelector((state) => state.myQuizList);
@@ -13,6 +14,9 @@ const MyQuiz = () => {
   useEffect(() => {
     dispatch(myListQuiz());
   }, [dispatch]);
+  // useEffect(() => {
+  //   Alert("State Changed");
+  // }, [myQuiz]);
   return (
     <div>
       <div>
@@ -24,7 +28,10 @@ const MyQuiz = () => {
         ) : (
           <div className="quiz-container">
             {myQuiz.map((ele) => (
-              <QuizComponent quizDetails={ele} key={ele._id}></QuizComponent>
+              <MyQuizComponent
+                quizDetails={ele}
+                key={ele._id}
+              ></MyQuizComponent>
             ))}
           </div>
         )}

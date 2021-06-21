@@ -17,6 +17,7 @@ const QuestionList = ({ id, history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
@@ -54,6 +55,7 @@ const QuestionList = ({ id, history }) => {
               clicked={clicked}
               setClicked={setClicked}
               questionLength={questionLength}
+              history={history}
             />
           </div>
 
