@@ -10,6 +10,7 @@ import QuizPage from "./screens/QuizPage";
 import PostQuestions from "./screens/PostQuestions";
 import MyQuiz from "./screens/MyQuiz";
 import NotFound from "./screens/NotFound";
+import Result from "./components/Result";
 function App() {
   return (
     <Router>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/create/:id" component={PostQuestions} exact></Route>
           <Route path="/quiz/:id" component={QuizPage} exact></Route>
           <Route path="/myquiz" component={MyQuiz}></Route>
+          <Route path="/quiz/result" component={Result}></Route>
           <Route path="/" component={NotFound}></Route>
         </Switch>
       </div>

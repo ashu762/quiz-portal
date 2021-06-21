@@ -65,7 +65,7 @@ const LoginPage = ({ location, history }) => {
         </a>
         <div className="d-flex justify-content-center mt-4">
           Don't Have an account
-          <a href="#" className="ml-3">
+          <a href="/register" className="ml-3">
             Register
           </a>
         </div>

@@ -94,7 +94,6 @@ const CreateQuiz = ({ history }) => {
           </Button>
         </Form>
       </FormContainer>
-      hello world
     </div>
   );
 };
