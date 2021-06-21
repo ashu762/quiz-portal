@@ -26,7 +26,7 @@ const Header = () => {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/profile">Profile</Nav.Link>
+                {/* <Nav.Link href="/profile">Profile</Nav.Link> */}
                 <Nav.Link href="/create">Create</Nav.Link>
                 <Nav.Link href="/myquiz">My Quizzes</Nav.Link>
                 <Nav.Link onClick={logoutHandler}>Logout</Nav.Link>
