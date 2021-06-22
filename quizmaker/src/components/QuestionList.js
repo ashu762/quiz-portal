@@ -75,7 +75,7 @@ const QuestionList = ({ id, history }) => {
           </div>
         </div>
       ) : (
-        <div>No questions</div>
+        <div className="score">No questions</div>
       )}
     </div>
   );
