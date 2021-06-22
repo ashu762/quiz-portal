@@ -139,7 +139,6 @@ const PostQuestions = ({ history }) => {
           </Button>
         </Form>
       </FormContainer>
-      hello world
     </div>
   );
 };

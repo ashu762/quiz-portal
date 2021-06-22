@@ -44,9 +44,7 @@ const QuestionList = ({ id, history }) => {
         <Message variant="danger">{error}</Message>
       ) : haveFinished ? (
         <div className="score">
-          <div className="scorecard">{`You have scored ${score} points out of ${
-            questions.length - 1
-          }`}</div>
+          <div className="scorecard">{`You have scored ${score} points out of ${questions.length}`}</div>
           <a href="/" className="link2Home">
             Play Another Quiz
           </a>
