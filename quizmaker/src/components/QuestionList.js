@@ -17,6 +17,7 @@ const QuestionList = ({ id, history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const [haveFinished, setHaveFinished] = useState(false);
 
   useEffect(() => {
     if (!userInfo) {
@@ -41,6 +42,15 @@ const QuestionList = ({ id, history }) => {
         <Loaders></Loaders>
       ) : error ? (
         <Message variant="danger">{error}</Message>
+      ) : haveFinished ? (
+        <div className="score">
+          <div className="scorecard">{`You have scored ${score} points out of ${
+            questions.length - 1
+          }`}</div>
+          <a href="/" className="link2Home">
+            Play Another Quiz
+          </a>
+        </div>
       ) : questionLength > 0 ? (
         <div className="quizList">
           <div className="quiz-content">
@@ -56,6 +66,7 @@ const QuestionList = ({ id, history }) => {
               setClicked={setClicked}
               questionLength={questionLength}
               history={history}
+              setHaveFinished={setHaveFinished}
             />
           </div>
 

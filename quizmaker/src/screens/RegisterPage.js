@@ -26,7 +26,7 @@ const RegisterPage = ({ history }) => {
   }, [userInfo]);
   const submitform = (e) => {
     e.preventDefault();
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       setMessage("Password Do not Match");
       return;
     } else dispatch(register(email, password, name, confirmPassword));

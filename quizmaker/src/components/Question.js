@@ -19,6 +19,7 @@ const Question = ({
   setClicked,
   questionLength,
   history,
+  setHaveFinished,
 }) => {
   const setClickhandler = (index) => {
     if (clicked[indexNum]) return;
@@ -42,6 +43,9 @@ const Question = ({
       );
     }
   };
+  function setFinished() {
+    setHaveFinished(true);
+  }
   return (
     <div className="question">
       <div className="question-title">{question.question}</div>
@@ -71,15 +75,9 @@ const Question = ({
             </div>
           )}
           {indexNum === questionLength - 1 ? (
-            <Router>
-              <Link to="/quiz/result">
-                <div className="prev link">See results</div>
-              </Link>
-              <Route
-                path="/quiz/result"
-                render={() => <Result></Result>}
-              ></Route>
-            </Router>
+            <div className="prev link" onClick={() => setFinished()}>
+              See results
+            </div>
           ) : (
             <div onClick={() => setIndex(indexNum + 1)} className="prev">
               next
