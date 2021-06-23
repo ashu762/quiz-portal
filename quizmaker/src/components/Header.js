@@ -21,7 +21,7 @@ const Header = () => {
       {userInfo ? (
         <div>
           <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">QuizMaker</Navbar.Brand>
+            <Navbar.Brand href="/">QuizMaker</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
