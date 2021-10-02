@@ -8,7 +8,7 @@
 }
 
 .red {
-  background-color: rgb(238, 45, 45);
+  background-color: #F8485E;
   cursor: default;
   color: white;
   border: none;
@@ -39,6 +39,7 @@ button {
   height: 100vh;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .quiz-details {
   flex-basis: 20%;
@@ -83,7 +84,7 @@ button {
   border-radius: 200px;
   width: 4.2rem;
   height: 4.2rem;
-  border: 1px solid red;
+  border: 1px solid #F8485E;
   margin: 10px 20px;
   cursor: pointer;
 }
@@ -121,7 +122,7 @@ button {
 }
 .red-check {
   color: white;
-  background-color: rgb(238, 45, 45);
+  background-color: #F8485E;
 }
 
 .score {
@@ -135,4 +136,14 @@ button {
   font-size: 30px;
   font-weight: bold;
   color: black;
+}
+
+
+.quizScore{
+  position: absolute;
+  top:40px;
+  background: #52006A;
+  color:white;
+  padding:10px 20px;
+
 }

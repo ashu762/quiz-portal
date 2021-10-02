@@ -31,6 +31,8 @@
 .quizzes-title {
   width: 100%;
   text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 .quiz {
   display: flex;
@@ -48,6 +50,10 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+
+.quiz-btn{
+  color:white !important;
 }
 
 .link2Home,
@@ -91,11 +97,14 @@
 .quiz-title {
   font-weight: bold;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   margin-bottom: 10px;
 }
 .quiz-description {
-  font-size: 0.8rem;
+  font-size:1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .quiz-footer {
@@ -103,7 +112,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* .quiz:hover {
@@ -132,7 +141,8 @@
   justify-content: center;
 }
 .login-form {
-  margin-top: 6rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
 }
@@ -153,4 +163,43 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+
+.margin-top{
+  margin-top: 10vh;
+}
+.login{
+  margin-bottom: 30px;
+}
+.form-label{
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.form-control{
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.btn{
+  border-radius: 5px !important;
+}
+
+.done-btn{
+  display: inline-block;
+  background-color: #B3E283;
+  color:black;
+  margin-left:20px !important;
+  border:none;
+}
+
+.submit-quiz-btn{
+  display: inline-block;
+  margin-right: 20px !important;
+  border:none;
+}
+
+.btn-container{
+  text-align: center;
+  margin-top: 20px;
 }

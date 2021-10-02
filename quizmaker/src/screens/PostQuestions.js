@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loaders from "../components/Loaders";
 import { postQuestion, clearQuestion } from "../actions/quizActions";
+
+import "../index.css";
+
 const PostQuestions = ({ history }) => {
   const [question, setQuestion] = useState("");
   const [correctOption, setCorrectOption] = useState(0);
@@ -122,21 +125,23 @@ const PostQuestions = ({ history }) => {
               onChange={(e) => setCorrectOption(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button
-            type="submit"
-            className="mybutton ml-auto mr-auto pl-4 pr-4"
-            variant="info"
-          >
-            Submit
-          </Button>
+          <div className="btn-container">
+            <Button
+              type="submit"
+              className="mybutton submit-quiz-btn ml-auto mr-auto pl-4 pr-4"
+              variant="info"
+            >
+              Submit
+            </Button>
 
-          <Button
-            onClick={quizCreated}
-            className="mybutton ml-auto mr-auto pl-4 pr-4"
-            variant="info"
-          >
-            I am done
-          </Button>
+            <Button
+              onClick={quizCreated}
+              className="mybutton done-btn ml-auto mr-auto pl-4 pr-4"
+              variant="info"
+            >
+              I am done
+            </Button>
+          </div>
         </Form>
       </FormContainer>
     </div>

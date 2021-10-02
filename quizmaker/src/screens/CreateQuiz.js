@@ -36,7 +36,7 @@ const CreateQuiz = ({ history }) => {
       setMessage("Please Enter A valid Author name!!");
       return;
     }
-    if (description.length < 30) {
+    if (description.length < 10) {
       setMessage("Please Enter A Description of more than 30 characters!!");
       return;
     }

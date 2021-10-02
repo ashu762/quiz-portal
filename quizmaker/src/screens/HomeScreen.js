@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { listQuiz } from "../actions/quizActions";
 import Message from "../components/Message";
 import Loaders from "../components/Loaders";
+
+import EmptyScreen from "../components/EmptyScreen";
+
 import "../index.css";
+
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const quizList = useSelector((state) => state.quizList);
@@ -33,7 +37,7 @@ const HomeScreen = () => {
           )}
         </div>
       ) : (
-        <div>Hello World</div>
+        <EmptyScreen />
       )}
     </div>
   );

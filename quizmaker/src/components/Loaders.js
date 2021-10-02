@@ -7,7 +7,7 @@ const Loaders = () => {
     <div className="loader">
       <Segment>
         <Dimmer active inverted>
-          <Loader size="large">Loading</Loader>
+          <Loader size="large" className="margin-top"></Loader>
         </Dimmer>
 
         <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />

@@ -13,7 +13,9 @@ const QuizComponent = ({ quizDetails }) => {
       <div className={chosen}>
         <div className="quiz">
           <div className="quiz-title">{quizDetails.name}</div>
-          <div className="quiz-description">{quizDetails.description}</div>
+          <div className="quiz-description" title={quizDetails.description}>
+            {quizDetails.description}
+          </div>
           <div class="quiz-footer">
             <div>{D}</div>
             <div>{quizDetails.author}</div>

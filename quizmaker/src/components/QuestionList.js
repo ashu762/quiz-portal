@@ -5,6 +5,8 @@ import "../App.css";
 import Question from "./Question";
 import Message from "../components/Message";
 import Loaders from "./Loaders";
+import NoQuestion from "../components/NoQuestion";
+
 import { listQuestions } from "../actions/quizActions";
 const QuestionList = ({ id, history }) => {
   const [score, setScore] = useState(0);
@@ -70,12 +72,12 @@ const QuestionList = ({ id, history }) => {
 
           <div className="line"></div>
           <div className="quiz-details">
-            <div>{score}</div>
+            <div className="quizScore">Total Score: {score}</div>
             <CheckList checked={checked} setIndex={setIndex} />
           </div>
         </div>
       ) : (
-        <div className="score">No questions</div>
+        <NoQuestion />
       )}
     </div>
   );
