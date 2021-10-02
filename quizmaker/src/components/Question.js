@@ -1,12 +1,8 @@
 import React, { useState } from "react";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import "../App.css";
-import {
-  Link,
-  NavLink,
-  Route,
-  BrowserRouter as Router,
-} from "react-router-dom";
-import Result from "./Result";
+
 const Question = ({
   question,
   score,
@@ -46,6 +42,44 @@ const Question = ({
   function setFinished() {
     setHaveFinished(true);
   }
+
+  const Modal = () => (
+    <Popup
+      trigger={<div className="prev link result-button">End quiz</div>}
+      modal
+    >
+      {(close) => (
+        <div className="asdas">
+          <h2 style={{ textAlign: "center", marginTop: "20px" }}>End Quiz</h2>
+          <div style={{ textAlign: "center", marginTop: "30px" }}>
+            Are you sure want to complete the Quiz ?
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginTop: "20px",
+              padding: "5px 40px",
+            }}
+          >
+            <div
+              onClick={setFinished}
+              style={{ fontWeight: "bold", cursor: "pointer" }}
+            >
+              YES
+            </div>
+            <div
+              onClick={close}
+              style={{ fontWeight: "bold", cursor: "pointer" }}
+            >
+              NO
+            </div>
+          </div>
+        </div>
+      )}
+    </Popup>
+  );
+
   return (
     <div className="question">
       <div className="question-title">{question.question}</div>
@@ -75,9 +109,7 @@ const Question = ({
             </div>
           )}
           {indexNum === questionLength - 1 ? (
-            <div className="prev link" onClick={() => setFinished()}>
-              See results
-            </div>
+            <Modal />
           ) : (
             <div onClick={() => setIndex(indexNum + 1)} className="prev">
               next

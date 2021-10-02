@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Alert } from "react-bootstrap";
+
 import "../index.css";
-import { deleteMyQuiz } from "../actions/quizActions";
+
+import { deleteMyQuiz, myListQuiz } from "../actions/quizActions";
+import { Loader } from "semantic-ui-react";
+
 const MyQuizComponent = ({ quizDetails }) => {
   const colorClass = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
   const index = Math.floor(Math.random() * colorClass.length);
@@ -13,22 +16,29 @@ const MyQuizComponent = ({ quizDetails }) => {
   const dispatch = useDispatch();
   const deleteQuiz = useSelector((state) => state.deleteQuiz);
 
-  const { error, loading, success } = deleteQuiz;
-  //   useEffect(() => {
-  //     if (success) {
-  //       Alert("Quiz Deletion Successful");
-  //     }
-  //   }, [success]);
+  const { loading, success } = deleteQuiz;
+  const firstUpadte = useRef(true);
+
+  useLayoutEffect(() => {
+    if (firstUpadte.current) {
+      firstUpadte.current = false;
+      return;
+    }
+    if (success) {
+      dispatch(myListQuiz());
+    }
+  }, [success]);
   const deleteHandler = () => {
     dispatch(deleteMyQuiz(quizDetails._id));
   };
   return (
     <div>
+      {loading && <Loader />}
       <div className={chosen}>
         <div className="quiz">
           <div className="quiz-title">{quizDetails.name}</div>
           <div className="quiz-description">{quizDetails.description}</div>
-          <div class="quiz-footer">
+          <div className="quiz-footer">
             <div>{D}</div>
             <div>{quizDetails.author}</div>
           </div>

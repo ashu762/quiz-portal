@@ -7,7 +7,6 @@ const QuizComponent = ({ quizDetails }) => {
   const chosen = colorClass[index];
   const d = Date(quizDetails.createdAt).split(" ");
   const D = d[0] + " " + d[1] + " " + d[2] + " " + d[3];
-  console.log(d);
   return (
     <div>
       <div className={chosen}>

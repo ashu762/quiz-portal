@@ -27,7 +27,9 @@ const HomeScreen = () => {
           {loading ? (
             <Loaders></Loaders>
           ) : error ? (
-            <Message variant="danger">{error}</Message>
+            <Message variant="danger">
+              Server Error. Please try again later
+            </Message>
           ) : (
             <div className="quiz-container">
               {quiz.map((ele) => (

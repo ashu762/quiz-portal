@@ -30,7 +30,6 @@ const PostQuestions = ({ history }) => {
   }, [userInfo]);
   useEffect(() => {
     if (questionInfo) {
-      console.log("Question Submitted");
       setQuestion("");
       setOption1("");
       setOption2("");
@@ -38,7 +37,7 @@ const PostQuestions = ({ history }) => {
       setOption4("");
       setCorrectOption(0);
       dispatch(clearQuestion());
-    } else console.log("Question Cleared!!");
+    }
   }, [questionInfo, clearQuestion]);
 
   const submitform = (e) => {
@@ -68,7 +67,11 @@ const PostQuestions = ({ history }) => {
       <FormContainer>
         <h1 className="d-flex justify-content-center login ">Add Question</h1>
         {message && <Message variant="danger">{message}</Message>}
-        {error && <Message variant="danger">{error}</Message>}
+        {error && (
+          <Message variant="danger">
+            Could not post questions. Please try again later
+          </Message>
+        )}
         {loading && <Loaders />}
         <Form onSubmit={submitform} className="d-flex flex-column">
           <Form.Group controlId="question">

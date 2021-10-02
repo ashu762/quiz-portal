@@ -37,16 +37,17 @@ const CreateQuiz = ({ history }) => {
       return;
     }
     if (description.length < 10) {
-      setMessage("Please Enter A Description of more than 30 characters!!");
+      setMessage("Please Enter A Description of more than 10 characters!!");
       return;
     }
     dispatch(postQuiz(name, author, description));
   };
-  console.log(quizInfo);
   return loading ? (
     <Loaders></Loaders>
   ) : error ? (
-    <Message variant="danger">{error}</Message>
+    <Message variant="danger">
+      Could not connect to server. Please try again later
+    </Message>
   ) : (
     <div className="login-form">
       <FormContainer>

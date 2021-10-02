@@ -24,7 +24,9 @@ const MyQuiz = () => {
         {loading ? (
           <Loaders></Loaders>
         ) : error ? (
-          <Message variant="danger">{error}</Message>
+          <Message variant="danger">
+            Server error. Please try again later
+          </Message>
         ) : (
           <div className="quiz-container">
             {myQuiz.map((ele) => (

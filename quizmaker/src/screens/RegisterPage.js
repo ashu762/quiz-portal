@@ -36,7 +36,11 @@ const RegisterPage = ({ history }) => {
       <FormContainer>
         <h1 className="d-flex justify-content-center login">REGISTER</h1>
         {message && <Message variant="danger">{message}</Message>}
-        {error && <Message variant="danger">{error}</Message>}
+        {error && (
+          <Message variant="danger">
+            Sever error. Please try again later
+          </Message>
+        )}
         {loading && <Loaders />}
         <Form onSubmit={submitform} className="d-flex flex-column">
           <Form.Group controlId="name">

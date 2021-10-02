@@ -31,7 +31,11 @@ const LoginPage = ({ location, history }) => {
     <div className="login-form">
       <FormContainer>
         <h1 className="d-flex justify-content-center login ">LOG IN!</h1>
-        {error && <Message variant="danger">{error}</Message>}
+        {error && (
+          <Message variant="danger">
+            Server error. Please try again later
+          </Message>
+        )}
         {loading && <Loader active inline="centered" />}
         <Form onSubmit={submitform} className="d-flex flex-column">
           <Form.Group controlId="email">

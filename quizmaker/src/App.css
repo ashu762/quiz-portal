@@ -19,6 +19,10 @@
   color: white;
   border-width: 0px;
 }
+.option:focus{
+  outline: 0;
+}
+
 .question {
   font-size: 2rem;
 }
@@ -36,17 +40,22 @@ button {
 
 .quizList {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 60px);
   justify-content: center;
   align-items: center;
   position: relative;
 }
 .quiz-details {
-  flex-basis: 20%;
+  position: relative;
+  width: 30%;
+  background-color: #F1F7E7;
   align-items: center;
+  height: calc(100vh - 60px);
 }
 .quiz-content {
   flex-basis: 70%;
+  width:70%;
+  
 }
 .line {
   border-left: 2px solid white;
@@ -57,8 +66,7 @@ button {
   margin-right: auto;
   display: block;
   font-size: 1rem;
-  border: 1px solid white;
-  width: 50%;
+  width: 40%;
   /* margin-left: 10%;
     margin-right: 10%; */
   margin-top: 1rem;
@@ -68,6 +76,7 @@ button {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+  filter: drop-shadow(0px 0px 1px rgba(0,0,0,.5))
 }
 /* @media (max-width: 800px) {
     html {
@@ -84,29 +93,30 @@ button {
   border-radius: 200px;
   width: 4.2rem;
   height: 4.2rem;
-  border: 1px solid #F8485E;
-  margin: 10px 20px;
+  margin: 10px 10px;
   cursor: pointer;
 }
 .buttons {
   margin-top: 3rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .prev {
-  margin-right: 2rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.4rem 2rem;
+  margin-bottom: 20px;
+  margin-left:10px;
+  margin-right:10px;
   font-size: 1rem;
   background-color: rgb(153, 23, 114);
   color: white;
   text-align: center;
   vertical-align: center;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  border-radius: 3px;
 }
 /* .next {
   margin-left: 2rem;
@@ -115,14 +125,17 @@ button {
 
 .green-check {
   color: white;
-  background-color: green;
+  background-color: rgba(139, 195, 74, 1);
+  filter: drop-shadow(0px 0px 3px rgba(0,0,0,.5))
 }
 .unchecked {
-  background-color: rgba(219, 201, 201, 0.76);
+  background-color: #fff;
+  filter: drop-shadow(0px 0px 3px rgba(0,0,0,.5))
 }
 .red-check {
   color: white;
   background-color: #F8485E;
+  filter: drop-shadow(0px 0px 3px rgba(0,0,0,.5))
 }
 
 .score {
@@ -140,10 +153,25 @@ button {
 
 
 .quizScore{
-  position: absolute;
-  top:40px;
   background: #52006A;
   color:white;
   padding:10px 20px;
+  text-align: center;
+  position: absolute;
+  width:100%;
+  bottom:10px
+}
+.checkParent{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  overflow-y: scroll;
+  justify-content: center;
+}
 
+@media only screen and (max-width: 500px) {
+  .buttons{
+    flex-direction:column;
+  }
+  
 }

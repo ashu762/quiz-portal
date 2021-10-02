@@ -97,7 +97,7 @@
 .quiz-title {
   font-weight: bold;
   color: white;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   margin-bottom: 10px;
 }
 .quiz-description {
@@ -106,6 +106,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* .result-button{
+  margin-right: 0;
+} */
 
 .quiz-footer {
   display: flex;

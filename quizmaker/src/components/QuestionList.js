@@ -43,7 +43,7 @@ const QuestionList = ({ id, history }) => {
       {loading ? (
         <Loaders></Loaders>
       ) : error ? (
-        <Message variant="danger">{error}</Message>
+        <Message variant="danger">Please try again later</Message>
       ) : haveFinished ? (
         <div className="score">
           <div className="scorecard">{`You have scored ${score} points out of ${questions.length}`}</div>
@@ -70,10 +70,11 @@ const QuestionList = ({ id, history }) => {
             />
           </div>
 
-          <div className="line"></div>
           <div className="quiz-details">
             <div className="quizScore">Total Score: {score}</div>
-            <CheckList checked={checked} setIndex={setIndex} />
+            <div style={{ height: "calc(100vh - 120px)" }}>
+              <CheckList checked={checked} setIndex={setIndex} />
+            </div>
           </div>
         </div>
       ) : (
