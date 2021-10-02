@@ -27,7 +27,6 @@ const QuestionList = ({ id, history }) => {
     }
   }, [userInfo]);
   useEffect(() => {
-    console.log(id);
     dispatch(listQuestions(id));
   }, []);
   useEffect(() => {

@@ -1,0 +1,29 @@
+.accordion-content{
+    margin-top:30px;
+    font-size:16px;
+    background-color: #fff;
+    text-align: center;
+    border: 1px solid rgba(53, 39, 39, 0.116);
+    
+}
+
+.accordion-title{
+    font-size: 14px;
+    
+
+}
+
+.accordion-button{
+    background-color: #fff;
+    font-weight: bold;
+    color:rgb(68, 38, 38);
+}
+.accordion-button:focus{
+    outline: 0 !important;
+}
+
+.accordion-hint{
+    color:rgb(45, 114, 131);
+    width:80%;
+    margin:0px auto 10px auto;
+}

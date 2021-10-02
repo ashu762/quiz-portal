@@ -9,8 +9,7 @@ const Loaders = () => {
         <Dimmer active inverted>
           <Loader size="large" className="margin-top"></Loader>
         </Dimmer>
-
-        <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
+        <Spinner animation="border" variant="info" size="lg" />
       </Segment>
     </div>
   );

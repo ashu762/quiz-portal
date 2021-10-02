@@ -11,23 +11,28 @@ import PostQuestions from "./screens/PostQuestions";
 import MyQuiz from "./screens/MyQuiz";
 import NotFound from "./screens/NotFound";
 import Result from "./components/Result";
+
+import "./App.css";
+
 function App() {
   return (
     <Router>
       <Header></Header>
-      <div className="App">
-        <Switch>
-          <Route path="/login" component={LoginPage}></Route>
-          <Route path="/register" component={RegisterPage}></Route>
-          <Route path="/" component={HomeScreen} exact></Route>
-          <Route path="/home" component={HomeScreen} exact></Route>
-          <Route path="/create" component={CreateQuiz} exact></Route>
-          <Route path="/create/:id" component={PostQuestions} exact></Route>
-          <Route path="/quiz/:id" component={QuizPage} exact></Route>
-          <Route path="/myquiz" component={MyQuiz}></Route>
-          <Route path="/quiz/result" component={Result}></Route>
-          <Route path="/" component={NotFound}></Route>
-        </Switch>
+      <div className="app-container">
+        <div className="App">
+          <Switch>
+            <Route path="/login" component={LoginPage}></Route>
+            <Route path="/register" component={RegisterPage}></Route>
+            <Route path="/" component={HomeScreen} exact></Route>
+            <Route path="/home" component={HomeScreen} exact></Route>
+            <Route path="/create" component={CreateQuiz} exact></Route>
+            <Route path="/create/:id" component={PostQuestions} exact></Route>
+            <Route path="/quiz/:id" component={QuizPage} exact></Route>
+            <Route path="/myquiz" component={MyQuiz}></Route>
+            <Route path="/quiz/result" component={Result}></Route>
+            <Route path="/" component={NotFound}></Route>
+          </Switch>
+        </div>
       </div>
     </Router>
   );

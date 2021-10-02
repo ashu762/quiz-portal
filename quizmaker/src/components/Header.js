@@ -9,6 +9,9 @@ import {
 } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../actions/userActions";
+
+import "../App.css";
+
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -17,7 +20,7 @@ const Header = () => {
     dispatch(logout());
   };
   return (
-    <div>
+    <div className="header-container">
       {userInfo ? (
         <div>
           <Navbar bg="light" expand="lg">

@@ -17,6 +17,7 @@ const PostQuestions = ({ history }) => {
   const [option3, setOption3] = useState("");
   const [option4, setOption4] = useState("");
   const [message, setMessage] = useState("");
+  const [hint, setHint] = useState("");
   const dispatch = useDispatch();
   const questionCreate = useSelector((state) => state.questionCreate);
   const { error, loading, questionInfo } = questionCreate;
@@ -35,6 +36,7 @@ const PostQuestions = ({ history }) => {
       setOption2("");
       setOption3("");
       setOption4("");
+      setHint("");
       setCorrectOption(0);
       dispatch(clearQuestion());
     }
@@ -48,7 +50,11 @@ const PostQuestions = ({ history }) => {
       option3.length === 0 ||
       option4.length === 0
     ) {
-      setMessage("Options do not match!");
+      setMessage("Options cannot be empty");
+      return;
+    }
+    if (correctOption < 0 || correctOption >= 4) {
+      setMessage("Please enter a option between 0 to 3!");
       return;
     }
     const arr = [];
@@ -57,7 +63,7 @@ const PostQuestions = ({ history }) => {
     arr.push(option2);
     arr.push(option3);
     arr.push(option4);
-    dispatch(postQuestion(question, correctOption, arr));
+    dispatch(postQuestion(question, correctOption, arr, hint));
   };
   const quizCreated = () => {
     history.push("/");
@@ -83,6 +89,7 @@ const PostQuestions = ({ history }) => {
               onChange={(e) => setQuestion(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="option1">
             <Form.Label>Option1</Form.Label>
             <Form.Control
@@ -92,6 +99,7 @@ const PostQuestions = ({ history }) => {
               onChange={(e) => setOption1(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="option2">
             <Form.Label>Option2</Form.Label>
             <Form.Control
@@ -101,6 +109,7 @@ const PostQuestions = ({ history }) => {
               onChange={(e) => setOption2(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="option3">
             <Form.Label>Option3</Form.Label>
             <Form.Control
@@ -110,6 +119,7 @@ const PostQuestions = ({ history }) => {
               onChange={(e) => setOption3(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="option1">
             <Form.Label>Option4</Form.Label>
             <Form.Control
@@ -119,13 +129,24 @@ const PostQuestions = ({ history }) => {
               onChange={(e) => setOption4(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="correctOption">
             <Form.Label>Correct Option</Form.Label>
             <Form.Control
-              type="name"
+              type="number"
               placeholder="Enter Correct Option"
               value={correctOption}
               onChange={(e) => setCorrectOption(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="hint">
+            <Form.Label>Hint text</Form.Label>
+            <Form.Control
+              type="name"
+              placeholder="Enter Hint Text"
+              value={hint}
+              onChange={(e) => setHint(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <div className="btn-container">

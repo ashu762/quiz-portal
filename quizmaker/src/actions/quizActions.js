@@ -113,90 +113,87 @@ export const listQuestions = (id) => async (dispatch, getState) => {
   }
 };
 
-export const postQuiz = (name, author, description) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({ type: QUIZ_CREATE_REQUEST });
+export const postQuiz =
+  (name, author, description) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: QUIZ_CREATE_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    if (!userInfo) {
-      throw new Error("Please Log In to Continue the process");
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      if (!userInfo) {
+        throw new Error("Please Log In to Continue the process");
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      const data = await axios.post(
+        "/api/quiz",
+        {
+          name: name,
+          author: author,
+          description: description,
+          user: userInfo._id,
+        },
+        config
+      );
+      dispatch({ type: QUIZ_CREATE_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: QUIZ_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
     }
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    const data = await axios.post(
-      "/api/quiz",
-      {
-        name: name,
-        author: author,
-        description: description,
-        user: userInfo._id,
-      },
-      config
-    );
-    dispatch({ type: QUIZ_CREATE_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: QUIZ_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-export const postQuestion = (question, correctOption, options) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({ type: QUESTION_CREATE_REQUEST });
+  };
+export const postQuestion =
+  (question, correctOption, options, hint) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: QUESTION_CREATE_REQUEST });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    if (!userInfo) {
-      throw new Error("Please Log In to Continue the process");
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      if (!userInfo) {
+        throw new Error("Please Log In to Continue the process");
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      const {
+        quizCreate: { quizInfo },
+      } = getState();
+      const data = await axios.post(
+        "/api/question",
+        {
+          question: question,
+          options: options,
+          correctOption: Number(correctOption),
+          user: userInfo._id,
+          quizName: quizInfo.id,
+          hint: hint,
+        },
+        config
+      );
+      dispatch({ type: QUESTION_CREATE_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: QUESTION_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
     }
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    const {
-      quizCreate: { quizInfo },
-    } = getState();
-    const data = await axios.post(
-      "/api/question",
-      {
-        question: question,
-        options: options,
-        correctOption: Number(correctOption),
-        user: userInfo._id,
-        quizName: quizInfo.id,
-      },
-      config
-    );
-    dispatch({ type: QUESTION_CREATE_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: QUESTION_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+  };
 
 export const deleteMyQuiz = (id) => async (dispatch, getState) => {
   try {

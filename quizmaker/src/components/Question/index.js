@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Accordion } from "react-bootstrap";
+import { ChevronDoubleDown } from "react-bootstrap-icons";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import "../App.css";
+import "../../App.css";
+import "./question.css";
 
 const Question = ({
   question,
@@ -100,6 +103,23 @@ const Question = ({
             </button>
           );
         })}
+        {question?.hint?.length > 0 && (
+          <div className="accordion-content">
+            <Accordion defaultActiveKey="0">
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>
+                  <div className="accordion-title">
+                    Show Hint <ChevronDoubleDown size={15} color="green" />
+                  </div>
+                </Accordion.Header>
+                <Accordion.Body className="accordion-hint">
+                  {question.hint}
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+        )}
+
         <div class="buttons">
           {indexNum === 0 ? (
             <div></div>

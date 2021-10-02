@@ -23,6 +23,9 @@ const questionModel = mongoose.Schema({
     type: Number,
     required: true,
   },
+  hint: {
+    type: String,
+  },
 });
 
 const Question = mongoose.model("Question", questionModel);

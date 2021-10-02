@@ -14,21 +14,23 @@ export const getQuestions = asyncHandler(async (req, res) => {
 // @route POST /api/question
 // @access public
 export const postQuestion = asyncHandler(async (req, res) => {
-  const { question, options, correctOption, user, quizName } = req.body;
+  const { question, options, correctOption, user, quizName, hint } = req.body;
   const ques = await Question.create({
     question,
     options,
     correctOption,
     user,
     quizName,
+    hint,
   });
   if (ques) {
     res.status(201).json({
-      name: ques.question,
-      options: ques.options,
-      correctOption: ques.correctOption,
-      user: ques.user,
-      quizName: ques.quizName,
+      name: ques?.question,
+      options: ques?.options,
+      correctOption: ques?.correctOption,
+      user: ques?.user,
+      quizName: ques?.quizName,
+      hint: ques?.hint,
     });
   } else {
     res.status(400);
