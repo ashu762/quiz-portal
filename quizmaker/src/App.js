@@ -13,6 +13,7 @@ import NotFound from "./screens/NotFound";
 import Result from "./components/Result";
 
 import "./App.css";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           </Switch>
         </div>
       </div>
+      <Footer />
     </Router>
   );
 }

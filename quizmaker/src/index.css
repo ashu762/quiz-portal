@@ -206,3 +206,21 @@
   text-align: center;
   margin-top: 20px;
 }
+.question-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-input{
+  width:60%;
+  resize: none;
+}
+.question-label{
+  color:rgba(58, 44, 44, 0.699);
+  font-size: 15px;
+}
+
+.add-question{
+  margin-bottom: 70px;
+}

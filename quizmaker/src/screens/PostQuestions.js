@@ -71,7 +71,9 @@ const PostQuestions = ({ history }) => {
   return (
     <div className="login-form">
       <FormContainer>
-        <h1 className="d-flex justify-content-center login ">Add Question</h1>
+        <h1 className="d-flex justify-content-center login add-question">
+          Add Question
+        </h1>
         {message && <Message variant="danger">{message}</Message>}
         {error && (
           <Message variant="danger">
@@ -80,73 +82,89 @@ const PostQuestions = ({ history }) => {
         )}
         {loading && <Loaders />}
         <Form onSubmit={submitform} className="d-flex flex-column">
-          <Form.Group controlId="question">
-            <Form.Label>Question</Form.Label>
+          <Form.Group controlId="question" className="question-container">
+            <Form.Label className="question-label">Question</Form.Label>
             <Form.Control
               type="name"
               placeholder="Enter Question"
               value={question}
+              className="question-input"
               onChange={(e) => setQuestion(e.target.value)}
+              autocomplete="off"
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="option1">
-            <Form.Label>Option1</Form.Label>
+          <Form.Group controlId="option1" className="question-container">
+            <Form.Label className="question-label">Option1</Form.Label>
             <Form.Control
               type="name"
               placeholder="Option 1"
               value={option1}
               onChange={(e) => setOption1(e.target.value)}
+              className="question-input"
+              autocomplete="off"
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="option2">
-            <Form.Label>Option2</Form.Label>
+          <Form.Group controlId="option2" className="question-container">
+            <Form.Label className="question-label">Option2</Form.Label>
             <Form.Control
               type="name"
               placeholder="Option 2"
               value={option2}
               onChange={(e) => setOption2(e.target.value)}
+              className="question-input"
+              autocomplete="off"
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="option3">
-            <Form.Label>Option3</Form.Label>
+          <Form.Group controlId="option3" className="question-container">
+            <Form.Label className="question-label">Option3</Form.Label>
             <Form.Control
               type="name"
               placeholder="Option 3"
               value={option3}
               onChange={(e) => setOption3(e.target.value)}
+              className="question-input"
+              autocomplete="off"
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="option1">
-            <Form.Label>Option4</Form.Label>
+          <Form.Group controlId="option1" className="question-container">
+            <Form.Label className="question-label">Option4</Form.Label>
             <Form.Control
               type="name"
               placeholder="Option 4"
               value={option4}
               onChange={(e) => setOption4(e.target.value)}
+              className="question-input"
+              autocomplete="off"
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="correctOption">
-            <Form.Label>Correct Option</Form.Label>
+          <Form.Group controlId="correctOption" className="question-container">
+            <Form.Label className="question-label">Correct Option</Form.Label>
             <Form.Control
               type="number"
               placeholder="Enter Correct Option"
               value={correctOption}
               onChange={(e) => setCorrectOption(e.target.value)}
+              className="question-input"
+              autocomplete="off"
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="hint">
-            <Form.Label>Hint text</Form.Label>
+          <Form.Group controlId="hint" className="question-container">
+            <Form.Label className="question-label">Hint text</Form.Label>
             <Form.Control
+              as="textarea"
+              rows={3}
               type="name"
               placeholder="Enter Hint Text"
               value={hint}
               onChange={(e) => setHint(e.target.value)}
+              className="question-input"
+              autocomplete="off"
             ></Form.Control>
           </Form.Group>
           <div className="btn-container">

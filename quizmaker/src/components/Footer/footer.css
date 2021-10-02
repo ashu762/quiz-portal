@@ -1,0 +1,20 @@
+.footer-container{
+    padding:20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(42, 61, 83);
+    align-items: center;
+    justify-content: center;
+    color:white;
+}
+
+.title{
+    color:white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.made-by{
+    font-weight: 400;
+    font-size: 18px;
+}

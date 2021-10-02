@@ -52,6 +52,7 @@ const QuestionList = ({ id, history }) => {
         </div>
       ) : questionLength > 0 ? (
         <div className="quizList">
+          <div className="question-number">Question No. {index + 1}</div>
           <div className="quiz-content">
             <Question
               question={questions[index]}
