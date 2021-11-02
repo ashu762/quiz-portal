@@ -26,11 +26,13 @@
 .question {
   font-size: 2rem;
 }
+
 .question-title {
   margin-top: 1rem;
   margin-bottom: 2.5rem;
   text-align: center;
 }
+
 button {
   border: none;
   padding: 0.75rem 2rem;
@@ -45,6 +47,7 @@ button {
   align-items: center;
   position: relative;
 }
+
 .quiz-details {
   position: relative;
   width: 30%;
@@ -61,6 +64,11 @@ button {
   border-left: 2px solid white;
   align-self: stretch;
 }
+
+.clicked{
+  background-color: #c2e0fd;
+}
+
 .option {
   margin-left: auto;
   margin-right: auto;
@@ -83,6 +91,10 @@ button {
       font-size: 10px;
     }
   } */
+
+.checkedQuestion{
+  background:#c2e0fd;
+}
 
 .checked {
   text-align: center;

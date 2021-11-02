@@ -44,7 +44,6 @@ export const postQuestion = asyncHandler(async (req, res) => {
 
 export const getQuestionByUser = asyncHandler(async (req, res) => {
   const questions = await Question.find({ user: req.params.id });
-  console.log(questions);
   if (questions) {
     res.status(201).json({
       questions,

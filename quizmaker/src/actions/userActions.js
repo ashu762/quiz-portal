@@ -7,7 +7,9 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
 } from "../constants/userConstants";
+
 import axios from "axios";
+
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -40,44 +42,43 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const register = (email, password, name, confirmPassword) => async (
-  dispatch
-) => {
-  try {
-    dispatch({
-      type: USER_REGISTER_REQUEST,
-    });
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const { data } = await axios.post(
-      "/api/users/",
-      {
-        email: email,
-        password: password,
-        name: name,
-        confirmPassword: confirmPassword,
-      },
-      config
-    );
+export const register =
+  (email, password, name, confirmPassword) => async (dispatch) => {
+    try {
+      dispatch({
+        type: USER_REGISTER_REQUEST,
+      });
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/users/",
+        {
+          email: email,
+          password: password,
+          name: name,
+          confirmPassword: confirmPassword,
+        },
+        config
+      );
 
-    dispatch({
-      type: USER_REGISTER_SUCCESS,
-      payload: data,
-    });
-    localStorage.setItem("userInfo", JSON.stringify(data));
-  } catch (error) {
-    dispatch({
-      type: USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      dispatch({
+        type: USER_REGISTER_SUCCESS,
+        payload: data,
+      });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } catch (error) {
+      dispatch({
+        type: USER_REGISTER_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");

@@ -6,6 +6,7 @@ import colors from "colors";
 import questionRoutes from "./routes/questionRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import quizRoutes from "./routes/quizRoutes.js";
+import quizResponseRoutes from "./routes/quizResponseRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -18,6 +19,7 @@ app.use("/api/quiz", quizRoutes);
 
 app.use("/api/question", questionRoutes);
 app.use("/api/users/", userRoutes);
+app.use("/api/quiz-response", quizResponseRoutes);
 app.use(errorHandler);
 // app.use(notFound);
 

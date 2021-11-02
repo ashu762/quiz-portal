@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import FormContainer from "../components/FormContainer";
+
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import "../index.css";
+
 import Message from "../components/Message";
 import Loaders from "../components/Loaders";
+
 import { postQuiz } from "../actions/quizActions";
+
+import FormContainer from "../components/FormContainer";
+
+import "../index.css";
+
 const CreateQuiz = ({ history }) => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
@@ -66,8 +72,10 @@ const CreateQuiz = ({ history }) => {
               placeholder="Enter Quiz Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              autoComplete="off"
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="author">
             <Form.Label>Author</Form.Label>
             <Form.Control
@@ -75,8 +83,10 @@ const CreateQuiz = ({ history }) => {
               placeholder="Author Name"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
+              autoComplete="off"
             ></Form.Control>
           </Form.Group>
+
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
@@ -84,8 +94,10 @@ const CreateQuiz = ({ history }) => {
               placeholder="Enter Description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              autoComplete="off"
             ></Form.Control>
           </Form.Group>
+
           <Button
             type="submit"
             className="mybutton ml-auto mr-auto pl-4 pr-4"

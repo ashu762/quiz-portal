@@ -23,8 +23,7 @@ const LoginPage = ({ location, history }) => {
   }, [history, userInfo]);
   const submitform = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
+
     dispatch(login(email, password));
   };
   return (

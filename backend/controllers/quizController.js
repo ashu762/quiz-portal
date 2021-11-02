@@ -7,6 +7,7 @@ import asyncHandler from "express-async-handler";
 // @access public
 export const postQuiz = asyncHandler(async (req, res) => {
   const { name, author, user, description } = req.body;
+  console.log(req.body);
   const createdAt = Date.now();
   const quiz = await Quiz.create({
     name,
@@ -68,7 +69,7 @@ export const getAllQuiz = asyncHandler(async (req, res) => {
 
 export const deleteQuiz = asyncHandler(async (req, res) => {
   const id = req.params.id;
-  console.log(id);
+
   const quiz = await Quiz.findByIdAndDelete(id);
   const question = await Question.deleteMany({ quizName: id });
   if (quiz) {

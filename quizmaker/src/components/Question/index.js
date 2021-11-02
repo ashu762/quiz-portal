@@ -1,48 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Accordion } from "react-bootstrap";
 import { ChevronDoubleDown } from "react-bootstrap-icons";
 import Popup from "reactjs-popup";
+
+import { postQuizResponse } from "../../actions/quizResponseActions.js";
+
 import "reactjs-popup/dist/index.css";
 import "../../App.css";
 import "./question.css";
 
 const Question = ({
   question,
-  score,
-  setScore,
   indexNum,
-  checked,
-  setChecked,
   setIndex,
   clicked,
   setClicked,
   questionLength,
-  history,
   setHaveFinished,
+  answers,
+  setAnswers,
+  id,
 }) => {
   const setClickhandler = (index) => {
-    if (clicked[indexNum]) return;
-    setClicked(
-      clicked.map((item, ind) => {
-        return ind == indexNum ? true : item;
-      })
-    );
-    if (index === question.correctOption) {
-      setChecked(
-        checked.map((item, ind) => {
-          return ind === indexNum ? 1 : item;
-        })
-      );
-      setScore(score + 1);
-    } else {
-      setChecked(
-        checked.map((item, index) => {
-          return index === indexNum ? 2 : item;
-        })
-      );
-    }
+    const newAnswers = [...answers];
+    newAnswers[indexNum] = index;
+    setAnswers(newAnswers);
+
+    const newClicked = [...clicked];
+    newClicked[indexNum] = true;
+    setClicked(newClicked);
   };
+
+  const dispatch = useDispatch();
+
   function setFinished() {
+    dispatch(postQuizResponse(id, answers));
     setHaveFinished(true);
   }
 
@@ -92,11 +85,7 @@ const Question = ({
             <button
               onClick={() => setClickhandler(index)}
               className={
-                clicked[indexNum] && question.correctOption === index
-                  ? "green option"
-                  : clicked[indexNum]
-                  ? "red option"
-                  : "option"
+                answers[indexNum] === index ? "clicked option" : "option"
               }
             >
               {option}

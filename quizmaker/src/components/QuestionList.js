@@ -9,14 +9,13 @@ import NoQuestion from "../components/NoQuestion";
 
 import { listQuestions } from "../actions/quizActions";
 const QuestionList = ({ id, history }) => {
-  const [score, setScore] = useState(0);
-  const [checked, setChecked] = useState([]);
   const [questionLength, setQuestionLength] = useState(-1);
   const [index, setIndex] = useState(0);
   const questionList = useSelector((state) => state.questionList);
   const { loading, error, questions } = questionList;
   const [clicked, setClicked] = useState([]);
   const dispatch = useDispatch();
+  const [answers, setAnswers] = useState([]);
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const [haveFinished, setHaveFinished] = useState(false);
@@ -26,14 +25,16 @@ const QuestionList = ({ id, history }) => {
       history.push("/login");
     }
   }, [userInfo]);
+
   useEffect(() => {
     dispatch(listQuestions(id));
   }, []);
+
   useEffect(() => {
     if (questions) {
       setQuestionLength(questions.length);
-      setChecked(new Array(questions.length).fill(0));
       setClicked(new Array(questions.length).fill(0));
+      setAnswers(new Array(questions.length).fill(-1));
     }
   }, [questions]);
 
@@ -45,7 +46,6 @@ const QuestionList = ({ id, history }) => {
         <Message variant="danger">Please try again later</Message>
       ) : haveFinished ? (
         <div className="score">
-          <div className="scorecard">{`You have scored ${score} points out of ${questions.length}`}</div>
           <a href="/" className="link2Home">
             Play Another Quiz
           </a>
@@ -56,24 +56,21 @@ const QuestionList = ({ id, history }) => {
           <div className="quiz-content">
             <Question
               question={questions[index]}
-              score={score}
-              setScore={setScore}
               indexNum={index}
               setIndex={setIndex}
-              checked={checked}
-              setChecked={setChecked}
               clicked={clicked}
               setClicked={setClicked}
               questionLength={questionLength}
-              history={history}
+              setAnswers={setAnswers}
+              answers={answers}
+              id={id}
               setHaveFinished={setHaveFinished}
             />
           </div>
 
           <div className="quiz-details">
-            <div className="quizScore">Total Score: {score}</div>
             <div style={{ height: "calc(100vh - 120px)" }}>
-              <CheckList checked={checked} setIndex={setIndex} />
+              <CheckList clicked={clicked} setIndex={setIndex} />
             </div>
           </div>
         </div>

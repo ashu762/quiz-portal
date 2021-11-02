@@ -65,7 +65,7 @@ export const myListQuiz = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const data = await axios.get(`/api/quiz/users/${userInfo._id}`, config);
+    const data = await axios.get(`/api/quiz/users/${userInfo.id}`, config);
 
     dispatch({
       type: MYQUIZ_LIST_SUCCESS,
@@ -121,6 +121,7 @@ export const postQuiz =
       const {
         userLogin: { userInfo },
       } = getState();
+
       if (!userInfo) {
         throw new Error("Please Log In to Continue the process");
       }
@@ -136,7 +137,7 @@ export const postQuiz =
           name: name,
           author: author,
           description: description,
-          user: userInfo._id,
+          user: userInfo.id,
         },
         config
       );
@@ -168,6 +169,7 @@ export const postQuestion =
           "Content-Type": "application/json",
         },
       };
+
       const {
         quizCreate: { quizInfo },
       } = getState();
@@ -177,7 +179,7 @@ export const postQuestion =
           question: question,
           options: options,
           correctOption: Number(correctOption),
-          user: userInfo._id,
+          user: userInfo.id,
           quizName: quizInfo.id,
           hint: hint,
         },
@@ -214,10 +216,9 @@ export const deleteMyQuiz = (id) => async (dispatch, getState) => {
     // const {
     //   quizCreate: { quizInfo },
     // } = getState();
-    console.log(id);
 
     const data = await axios.get(`/api/quiz/delete/${id}`, config);
-    console.log(data);
+
     dispatch({ type: QUIZ_DELETE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
