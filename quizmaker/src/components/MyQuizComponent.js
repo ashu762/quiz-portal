@@ -1,6 +1,7 @@
 import React, { useRef, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Button } from "@chakra-ui/react";
 
 import "../index.css";
 
@@ -15,6 +16,8 @@ const MyQuizComponent = ({ quizDetails }) => {
   const D = d[0] + " " + d[1] + " " + d[2] + " " + d[3];
   const dispatch = useDispatch();
   const deleteQuiz = useSelector((state) => state.deleteQuiz);
+
+  const history = useHistory();
 
   const { loading, success } = deleteQuiz;
   const firstUpadte = useRef(true);
@@ -31,6 +34,14 @@ const MyQuizComponent = ({ quizDetails }) => {
   const deleteHandler = () => {
     dispatch(deleteMyQuiz(quizDetails._id));
   };
+
+  const onViewButtonClick = () => {
+    history.push({
+      pathname: `/quiz/details/${quizDetails._id}`,
+      state: quizDetails,
+    });
+  };
+
   return (
     <div>
       {loading && <Loader />}
@@ -48,6 +59,7 @@ const MyQuizComponent = ({ quizDetails }) => {
           <div className="deleteQuiz" onClick={deleteHandler}>
             Delete
           </div>
+          <Button onClick={onViewButtonClick}>View</Button>
         </div>
       </div>
     </div>

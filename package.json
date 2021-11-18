@@ -5,13 +5,19 @@
   "type": "module",
   "main": "server.js",
   "dependencies": {
+    "@chakra-ui/react": "^1.6.10",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
+    "framer-motion": "^4.1.17",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.7",
+    "multer": "^1.4.3",
+    "nodemailer": "^6.7.1",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
@@ -20,7 +26,7 @@
   },
   "scripts": {
     "start": "node backend/server",
-    "server": "nodemon backend/server",
+    "server": "nodemon backend/server --ignore client",
     "client": "npm start --prefix quizmaker",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix quizmaker && npm run build --prefix quizmaker"

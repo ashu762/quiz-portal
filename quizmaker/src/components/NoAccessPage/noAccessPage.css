@@ -1,0 +1,12 @@
+.nacContainer{
+    width:100vw;
+    height:90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nacHeading{
+    font-size: 32px;
+    font-weight: 400;
+}

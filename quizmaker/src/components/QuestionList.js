@@ -34,7 +34,7 @@ const QuestionList = ({ id, history }) => {
     if (questions) {
       setQuestionLength(questions.length);
       setClicked(new Array(questions.length).fill(0));
-      setAnswers(new Array(questions.length).fill(-1));
+      setAnswers(new Array(questions.length).fill({}));
     }
   }, [questions]);
 

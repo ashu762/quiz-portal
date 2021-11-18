@@ -27,7 +27,7 @@ export const postQuizResponse =
         "/api/quiz-response",
         {
           name: userInfo.name,
-          userId: userInfo.id,
+          userId: userInfo._id || userInfo.id,
           emailId: userInfo.email,
           quizId,
           quizResponse,

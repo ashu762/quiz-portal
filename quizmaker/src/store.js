@@ -10,6 +10,7 @@ import {
   questionCreateReducer,
   MyQuizListReducer,
   quizDeleteReducer,
+  generateQuizListReducer,
 } from "./reducers/quizReducers";
 import { quizResponseCreateReducer } from "./reducers/quizResponseReducers";
 
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   myQuizList: MyQuizListReducer,
   deleteQuiz: quizDeleteReducer,
   quizResponseCreate: quizResponseCreateReducer,
+  quizReport: generateQuizListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

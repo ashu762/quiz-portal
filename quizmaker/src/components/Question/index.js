@@ -24,7 +24,7 @@ const Question = ({
 }) => {
   const setClickhandler = (index) => {
     const newAnswers = [...answers];
-    newAnswers[indexNum] = index;
+    newAnswers[indexNum] = { questionId: question._id, index };
     setAnswers(newAnswers);
 
     const newClicked = [...clicked];
@@ -85,7 +85,7 @@ const Question = ({
             <button
               onClick={() => setClickhandler(index)}
               className={
-                answers[indexNum] === index ? "clicked option" : "option"
+                answers[indexNum].index === index ? "clicked option" : "option"
               }
             >
               {option}
@@ -109,7 +109,7 @@ const Question = ({
           </div>
         )}
 
-        <div class="buttons">
+        <div className="buttons">
           {indexNum === 0 ? (
             <div></div>
           ) : (

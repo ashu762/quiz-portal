@@ -18,6 +18,9 @@ import {
   QUIZ_DELETE_FAIL,
   QUIZ_DELETE_REQUEST,
   QUIZ_DELETE_SUCCESS,
+  GENERATE_REPORT_FAIL,
+  GENERATE_REPORT_REQUEST,
+  GENERATE_REPORT_SUCCESS,
 } from "../constants/quizConstants";
 
 export const quizListReducer = (state = { quiz: [] }, action) => {
@@ -94,6 +97,19 @@ export const quizDeleteReducer = (state = {}, action) => {
     case QUIZ_DELETE_SUCCESS:
       return { loading: false, success: true };
     case QUIZ_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const generateQuizListReducer = (state = { report: [] }, action) => {
+  switch (action.type) {
+    case GENERATE_REPORT_REQUEST:
+      return { loading: true, report: [] };
+    case GENERATE_REPORT_SUCCESS:
+      return { loading: false, report: action.payload.data };
+    case GENERATE_REPORT_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

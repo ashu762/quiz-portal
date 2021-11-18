@@ -18,6 +18,9 @@ import {
   QUIZ_DELETE_REQUEST,
   QUIZ_DELETE_FAIL,
   QUIZ_DELETE_SUCCESS,
+  GENERATE_REPORT_FAIL,
+  GENERATE_REPORT_REQUEST,
+  GENERATE_REPORT_SUCCESS,
 } from "../constants/quizConstants";
 import axios from "axios";
 export const listQuiz = (id) => async (dispatch, getState) => {
@@ -65,7 +68,7 @@ export const myListQuiz = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const data = await axios.get(`/api/quiz/users/${userInfo.id}`, config);
+    const data = await axios.get(`/api/quiz/users/${userInfo._id}`, config);
 
     dispatch({
       type: MYQUIZ_LIST_SUCCESS,
@@ -137,7 +140,7 @@ export const postQuiz =
           name: name,
           author: author,
           description: description,
-          user: userInfo.id,
+          user: userInfo._id,
         },
         config
       );
@@ -179,7 +182,7 @@ export const postQuestion =
           question: question,
           options: options,
           correctOption: Number(correctOption),
-          user: userInfo.id,
+          user: userInfo._id || userInfo.id,
           quizName: quizInfo.id,
           hint: hint,
         },
@@ -233,4 +236,35 @@ export const deleteMyQuiz = (id) => async (dispatch, getState) => {
 
 export const clearQuestion = () => async (dispatch) => {
   dispatch({ type: QUESTION_CLEAR });
+};
+
+export const generateReport = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: GENERATE_REPORT_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    if (!userInfo) {
+      throw new Error("Please Log In to Continue the process");
+    }
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const data = await axios.get(`/api/quiz/report/${id}`, config);
+
+    dispatch({
+      type: GENERATE_REPORT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GENERATE_REPORT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
 };

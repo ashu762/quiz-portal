@@ -87,13 +87,13 @@
   -o-border-radius: 5px;
   color: rgb(29, 24, 24);
 }
-.link:hover {
+/* .link:hover {
   text-decoration: none;
   color: black;
   transition-timing-function: ease-in;
   animation: sliding 2s infinite;
   -webkit-animation: sliding 2s infinite;
-}
+} */
 .quiz-title {
   font-weight: bold;
   color: white;
@@ -223,4 +223,17 @@
 
 .add-question{
   margin-bottom: 70px;
+}
+
+editor-squiggler{
+  display: none;
+}
+
+.toastBox{
+  background:rgb(50, 204, 183);
+  margin-top:50px;
+  padding:20px 20px !important;
+  color:white;
+  border-radius: 10px;
+  opacity: 0.5;
 }

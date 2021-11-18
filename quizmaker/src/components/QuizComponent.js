@@ -15,7 +15,7 @@ const QuizComponent = ({ quizDetails }) => {
           <div className="quiz-description" title={quizDetails.description}>
             {quizDetails.description}
           </div>
-          <div class="quiz-footer">
+          <div className="quiz-footer">
             <div>{D}</div>
             <div>{quizDetails.author}</div>
           </div>
