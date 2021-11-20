@@ -1,8 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Accordion } from "react-bootstrap";
-import { ChevronDoubleDown } from "react-bootstrap-icons";
 import Popup from "reactjs-popup";
+
+import {
+  AccordionButton,
+  Box,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Accordion,
+} from "@chakra-ui/react";
 
 import { postQuizResponse } from "../../actions/quizResponseActions.js";
 
@@ -93,20 +100,25 @@ const Question = ({
           );
         })}
         {question?.hint?.length > 0 && (
-          <div className="accordion-content">
-            <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>
-                  <div className="accordion-title">
-                    Show Hint <ChevronDoubleDown size={15} color="green" />
+          <Box>
+            <Accordion allowToggle>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box flex="1" textAlign="left" ml={8}>
+                      Show More
+                    </Box>
+                    <AccordionIcon mr={8} />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4} ml={8}>
+                  <div style={{ fontSize: "16px", fontWeight: "bold" }}>
+                    {question.hint}
                   </div>
-                </Accordion.Header>
-                <Accordion.Body className="accordion-hint">
-                  {question.hint}
-                </Accordion.Body>
-              </Accordion.Item>
+                </AccordionPanel>
+              </AccordionItem>
             </Accordion>
-          </div>
+          </Box>
         )}
 
         <div className="buttons">

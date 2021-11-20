@@ -20,13 +20,22 @@ function getRollNumber(emailId) {
 
 function getTotalCorrect(questions, quizResponse) {
   let ans = 0;
+
   for (const response of quizResponse) {
     const questionId = response.questionId;
     const index = response.index;
 
-    let question = questions.find((q) => (q._id = questionId));
+    const question = search(questionId, questions);
 
-    if (question.correctOption === index) ans++;
+    if (question?.correctOption === index) ans++;
   }
   return ans;
+}
+
+function search(nameKey, myArray) {
+  for (var i = 0; i < myArray.length; i++) {
+    if (myArray[i]._id.toString() === nameKey.toString()) {
+      return myArray[i];
+    }
+  }
 }

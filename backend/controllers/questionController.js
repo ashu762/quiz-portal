@@ -53,3 +53,39 @@ export const getQuestionByUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid request or no question found!");
   }
 });
+
+export const updateQuestion = asyncHandler(async (req, res) => {
+  const dbquestion = await Question.findById(req.params.id);
+
+  const { question, options, correctOption, user, quizName, hint } = req.body;
+
+  dbquestion.question = question;
+  dbquestion.options = options;
+  dbquestion.correctOption = correctOption;
+  dbquestion.user = user;
+  dbquestion.quizName = quizName;
+  dbquestion.hint = hint;
+
+  if (question) {
+    const updatedQuestion = await dbquestion.save();
+    res.status(201).json({
+      updatedQuestion,
+      success: true,
+    });
+  } else {
+    res.status(401);
+    throw new Error("Invalid request or no question found!");
+  }
+});
+
+export const deleteQuestion = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+
+  const question = await Question.findByIdAndDelete(id);
+  if (question) {
+    res.status(200).json({ success: true });
+  } else {
+    res.status(400);
+    throw new Error("An error occured while deleting the question");
+  }
+});

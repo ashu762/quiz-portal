@@ -50,7 +50,7 @@ const MyQuizComponent = ({ quizDetails }) => {
           <div className="quiz-title">{quizDetails.name}</div>
           <div className="quiz-description">{quizDetails.description}</div>
           <div className="quiz-footer">
-            <div>{D}</div>
+            <div>Author</div>
             <div>{quizDetails.author}</div>
           </div>
           <Link to={`quiz/${quizDetails._id}`} className="link quiz-btn">

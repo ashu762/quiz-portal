@@ -1,5 +1,5 @@
 import { Box, Flex } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/react";
+import { Button, useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,8 @@ import ResponsePdf from "../../components/ResponsePdf/ResponsePdf";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { ConeStriped } from "react-bootstrap-icons";
 import axios from "axios";
+import QuestionDetails from "../../components/QuestionDetails";
+import AddQuestion from "../../components/AddQuestion";
 
 function QuizDetailsPage() {
   const userInfo = localStorage.getItem("userInfo");
@@ -36,6 +38,9 @@ function QuizDetailsPage() {
   const { success } = deleteQuiz;
 
   const [quizResponseData, setQuizResponseData] = useState();
+  const userData = JSON.parse(userInfo);
+
+  const toast = useToast();
 
   useEffect(() => {
     dispatch(generateReport(quizDetails?._id));
@@ -65,8 +70,6 @@ function QuizDetailsPage() {
   };
 
   const sendMails = async () => {
-    const userData = JSON.parse(userInfo);
-
     const config = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
@@ -74,11 +77,25 @@ function QuizDetailsPage() {
     };
 
     const data = await axios.get(`/api/quiz/send/${quizDetails._id}`, config);
+
+    if (data?.data?.success) {
+      toast({
+        title: "Mail is succesfully sent to everyone",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Please try again after sometime",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   const onPriveteClick = async (isPrivate) => {
-    const userData = JSON.parse(userInfo);
-
     const config = {
       headers: {
         Authorization: `Bearer ${userData.token}`,
@@ -98,34 +115,18 @@ function QuizDetailsPage() {
 
   return (
     <Box m="16" id="box">
-      {/* <Flex alignItems="center">
-        <div className="qdpQuizName">{quizDetails?.name}</div>
-        <Button
-          colorScheme="red"
-          variant="solid"
-          mx={8}
-          className="qdpDeleteButton"
-          onClick={deleteHandler}
-        >
-          Delete
-        </Button>
-      </Flex> */}
       <Box my={8}>
-        <div>Subject Name</div>
-        <input
-          value={subjectName}
-          className="subjectInput"
-          onChange={(e) => setSubjectName(e.target.value)}
-        />
         <PDFDownloadLink
-          document={<ResponsePdf report={report} subjectName={subjectName} />}
+          document={
+            <ResponsePdf report={report} subjectName={quizDetails.name} />
+          }
           fileName="response.pdf"
         >
           {({ blob, url, loading, error }) => {
             return loading ? (
               "Loading"
             ) : (
-              <Button mx={8}>Download the test result</Button>
+              <Button>Download the test result</Button>
             );
           }}
         </PDFDownloadLink>
@@ -136,7 +137,7 @@ function QuizDetailsPage() {
       </Button>
 
       <div style={{ marginTop: "40px" }}>
-        <h2>Make the quiz Private</h2>
+        <h2>Make the quiz private</h2>
         <Button my={6} onClick={() => onPriveteClick(true)}>
           Yes
         </Button>
@@ -144,6 +145,17 @@ function QuizDetailsPage() {
           No
         </Button>
       </div>
+      <Box mt={8}>
+        <QuestionDetails id={quizDetails._id} token={userData.token} />
+      </Box>
+
+      <Box mx={4}>
+        <AddQuestion
+          id={quizDetails._id}
+          token={userData.token}
+          userId={userData?._id}
+        />
+      </Box>
     </Box>
   );
 }
