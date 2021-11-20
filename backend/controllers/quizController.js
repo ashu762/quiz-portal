@@ -4,6 +4,7 @@ import Question from "../models/questionModel.js";
 import asyncHandler from "express-async-handler";
 import QuizResponse from "../models/quizResponseModel.js";
 import { generateReportHelper } from "../config/generateReportHelper.js";
+import { sendMails } from "../config/nodeMailer.js";
 // @desc Create Quiz
 // @route GEt /api/quiz
 // @access public
@@ -81,16 +82,24 @@ export const deleteQuiz = asyncHandler(async (req, res) => {
   }
 });
 
-export const sendMailsToEveryone = asyncHandler(async (req, res) => {
+export const sendEmailsToEveryone = asyncHandler(async (req, res) => {
   const id = req.params.id;
 
-  const quiz = await Quiz.findByIdAndDelete(id);
-  const question = await Question.deleteMany({ quizName: id });
+  const quiz = await Quiz.findById(id);
+
+  const questions = await Question.find({ quizName: id });
+
+  const responses = await QuizResponse.find({ quizId: id });
+
+  const generatedReport = generateReportHelper(questions, responses);
+
+  sendMails(generatedReport, quiz?.name);
+
   if (quiz) {
     res.status(200).json({ success: true });
   } else {
     res.status(400);
-    throw new Error("An error occured while deleting the quiz");
+    throw new Error("An error occured while sending the mails to everyone");
   }
 });
 
@@ -109,6 +118,6 @@ export const sendGeneratedReport = asyncHandler(async (req, res) => {
     res.status(200).json({ success: true, report: generatedReport });
   } else {
     res.status(400);
-    throw new Error("An error occured while deleting the quiz");
+    throw new Error("An error occured while genrating the report");
   }
 });

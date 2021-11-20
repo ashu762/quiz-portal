@@ -12,8 +12,9 @@ import { deleteMyQuiz, generateReport } from "../../actions/quizActions";
 import "./quizDetailsPage.css";
 import { useEffect } from "react";
 import ResponsePdf from "../../components/ResponsePdf/ResponsePdf";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import { ConeStriped } from "react-bootstrap-icons";
+import axios from "axios";
 
 function QuizDetailsPage() {
   const userInfo = localStorage.getItem("userInfo");
@@ -63,6 +64,19 @@ function QuizDetailsPage() {
     dispatch(deleteMyQuiz(quizDetails?._id));
   };
 
+  const sendMails = async () => {
+    const userData = JSON.parse(userInfo);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
+
+    const data = await axios.get(`/api/quiz/send/${quizDetails._id}`, config);
+    console.log(data);
+  };
+
   return (
     <Box m="16" id="box">
       <Flex alignItems="center">
@@ -92,6 +106,8 @@ function QuizDetailsPage() {
           return loading ? "Loading" : "Download Now";
         }}
       </PDFDownloadLink>
+
+      <div onClick={sendMails}>Send Mails to Everyone for the test</div>
     </Box>
   );
 }
