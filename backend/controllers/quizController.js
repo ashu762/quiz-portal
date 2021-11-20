@@ -9,7 +9,7 @@ import { sendMails } from "../config/nodeMailer.js";
 // @route GEt /api/quiz
 // @access public
 export const postQuiz = asyncHandler(async (req, res) => {
-  const { name, author, user, description } = req.body;
+  const { name, author, user, description, isPrivate } = req.body;
   const createdAt = Date.now();
   const quiz = await Quiz.create({
     name,
@@ -17,6 +17,7 @@ export const postQuiz = asyncHandler(async (req, res) => {
     user,
     description,
     createdAt,
+    isPrivate,
   });
   if (quiz) {
     res.status(200).json({
@@ -26,6 +27,7 @@ export const postQuiz = asyncHandler(async (req, res) => {
       id: quiz._id,
       description: quiz.description,
       createdAt: quiz.createdAt,
+      isPrivate: quiz.isPrivate,
     });
   } else {
     res.status(400);
@@ -119,5 +121,23 @@ export const sendGeneratedReport = asyncHandler(async (req, res) => {
   } else {
     res.status(400);
     throw new Error("An error occured while genrating the report");
+  }
+});
+
+export const updateQuiz = asyncHandler(async (req, res) => {
+  const { isPrivate } = req.body;
+  const quiz = await Quiz.findById(req.params.id);
+
+  quiz.isPrivate = isPrivate;
+  if (quiz) {
+    const updatedQuiz = await quiz.save();
+
+    res.status(200).json({
+      updatedQuiz,
+      success: true,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Quiz Creation unsuccessful");
   }
 });

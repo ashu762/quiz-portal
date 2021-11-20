@@ -19,6 +19,10 @@ const quizSchema = mongoose.Schema(
       type: String,
       default: "It is a Quiz",
     },
+    isPrivate: {
+      type: Boolean,
+      default: false,
+    },
     // createdAt: {
     //   type: String,
     //   default: Date.now(),

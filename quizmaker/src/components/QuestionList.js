@@ -8,6 +8,7 @@ import Loaders from "./Loaders";
 import NoQuestion from "../components/NoQuestion";
 
 import { listQuestions } from "../actions/quizActions";
+import { Box } from "@chakra-ui/layout";
 const QuestionList = ({ id, history }) => {
   const [questionLength, setQuestionLength] = useState(-1);
   const [index, setIndex] = useState(0);
@@ -46,6 +47,7 @@ const QuestionList = ({ id, history }) => {
         <Message variant="danger">Please try again later</Message>
       ) : haveFinished ? (
         <div className="score">
+          <Box>Your response has been successfully submitted</Box>
           <a href="/" className="link2Home">
             Play Another Quiz
           </a>

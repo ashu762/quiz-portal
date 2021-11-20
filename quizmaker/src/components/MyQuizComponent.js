@@ -59,7 +59,9 @@ const MyQuizComponent = ({ quizDetails }) => {
           <div className="deleteQuiz" onClick={deleteHandler}>
             Delete
           </div>
-          <Button onClick={onViewButtonClick}>View</Button>
+          <Button onClick={onViewButtonClick} colorScheme="teal">
+            View
+          </Button>
         </div>
       </div>
     </div>

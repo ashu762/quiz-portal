@@ -11,11 +11,13 @@ import { postQuiz } from "../actions/quizActions";
 import FormContainer from "../components/FormContainer";
 
 import "../index.css";
+import { Checkbox } from "@chakra-ui/checkbox";
 
 const CreateQuiz = ({ history }) => {
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
+  const [isPrivate, setIsPrivate] = useState(false);
   const [message, setMessage] = useState();
   const dispatch = useDispatch();
   const quizCreate = useSelector((state) => state.quizCreate);
@@ -46,7 +48,7 @@ const CreateQuiz = ({ history }) => {
       setMessage("Please Enter A Description of more than 10 characters!!");
       return;
     }
-    dispatch(postQuiz(name, author, description));
+    dispatch(postQuiz(name, author, description, isPrivate));
   };
   return loading ? (
     <Loaders></Loaders>
@@ -97,6 +99,18 @@ const CreateQuiz = ({ history }) => {
               autoComplete="off"
             ></Form.Control>
           </Form.Group>
+
+          <div style={{ display: "flex", marginBottom: "20px" }}>
+            <div className="privateQuiz" style={{ marginRight: "30px" }}>
+              Do you want to make the quiz Private?
+            </div>
+            <Checkbox
+              checked={isPrivate}
+              onChange={(e) => setIsPrivate(e.target.checked)}
+            >
+              Yes
+            </Checkbox>
+          </div>
 
           <Button
             type="submit"

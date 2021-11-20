@@ -117,7 +117,7 @@ export const listQuestions = (id) => async (dispatch, getState) => {
 };
 
 export const postQuiz =
-  (name, author, description) => async (dispatch, getState) => {
+  (name, author, description, isPrivate) => async (dispatch, getState) => {
     try {
       dispatch({ type: QUIZ_CREATE_REQUEST });
 
@@ -141,6 +141,7 @@ export const postQuiz =
           author: author,
           description: description,
           user: userInfo._id,
+          isPrivate,
         },
         config
       );

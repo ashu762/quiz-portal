@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import QuizComponent from "../components/QuizComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { listQuiz } from "../actions/quizActions";
@@ -56,9 +56,15 @@ const HomeScreen = () => {
             </Message>
           ) : (
             <div className="quiz-container">
-              {quiz.map((ele) => (
-                <QuizComponent quizDetails={ele} key={ele._id}></QuizComponent>
-              ))}
+              {quiz.map((ele) => {
+                if (ele.isPrivate) return null;
+                return (
+                  <QuizComponent
+                    quizDetails={ele}
+                    key={ele._id}
+                  ></QuizComponent>
+                );
+              })}
             </div>
           )}
         </div>

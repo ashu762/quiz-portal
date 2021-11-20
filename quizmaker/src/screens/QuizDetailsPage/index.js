@@ -31,7 +31,7 @@ function QuizDetailsPage() {
 
   const deleteQuiz = useSelector((state) => state.deleteQuiz);
 
-  const report = useSelector((state) => state.quizReport.report.report);
+  const report = useSelector((state) => state?.quizReport?.report?.report);
 
   const { success } = deleteQuiz;
 
@@ -74,12 +74,31 @@ function QuizDetailsPage() {
     };
 
     const data = await axios.get(`/api/quiz/send/${quizDetails._id}`, config);
-    console.log(data);
   };
+
+  const onPriveteClick = async (isPrivate) => {
+    const userData = JSON.parse(userInfo);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
+
+    const data = await axios.post(
+      `/api/quiz/update/${quizDetails._id}`,
+      { isPrivate },
+      config
+    );
+  };
+
+  if (!report) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Box m="16" id="box">
-      <Flex alignItems="center">
+      {/* <Flex alignItems="center">
         <div className="qdpQuizName">{quizDetails?.name}</div>
         <Button
           colorScheme="red"
@@ -90,24 +109,41 @@ function QuizDetailsPage() {
         >
           Delete
         </Button>
-      </Flex>
+      </Flex> */}
+      <Box my={8}>
+        <div>Subject Name</div>
+        <input
+          value={subjectName}
+          className="subjectInput"
+          onChange={(e) => setSubjectName(e.target.value)}
+        />
+        <PDFDownloadLink
+          document={<ResponsePdf report={report} subjectName={subjectName} />}
+          fileName="response.pdf"
+        >
+          {({ blob, url, loading, error }) => {
+            return loading ? (
+              "Loading"
+            ) : (
+              <Button mx={8}>Download the test result</Button>
+            );
+          }}
+        </PDFDownloadLink>
+      </Box>
 
-      <div>Subject Name</div>
-      <input
-        value={subjectName}
-        className="subjectInput"
-        onChange={(e) => setSubjectName(e.target.value)}
-      />
-      <PDFDownloadLink
-        document={<ResponsePdf report={report} subjectName={subjectName} />}
-        fileName="response.pdf"
-      >
-        {({ blob, url, loading, error }) => {
-          return loading ? "Loading" : "Download Now";
-        }}
-      </PDFDownloadLink>
+      <Button onClick={sendMails} className="sendMail" colorScheme="telegram">
+        Send Mails to Everyone for the test
+      </Button>
 
-      <div onClick={sendMails}>Send Mails to Everyone for the test</div>
+      <div style={{ marginTop: "40px" }}>
+        <h2>Make the quiz Private</h2>
+        <Button my={6} onClick={() => onPriveteClick(true)}>
+          Yes
+        </Button>
+        <Button my={6} mx={8} onClick={() => onPriveteClick(false)}>
+          No
+        </Button>
+      </div>
     </Box>
   );
 }

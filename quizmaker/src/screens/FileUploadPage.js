@@ -13,7 +13,6 @@ const FileUploadPage = () => {
     }
     axios.post("/api/upload", formData, {}).then((response) => {
       setImg(response.data);
-      console.log(response.data);
     });
   };
 
