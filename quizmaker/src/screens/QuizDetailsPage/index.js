@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box, Divider, Flex } from "@chakra-ui/layout";
 import { Button, useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router";
 import React, { useState } from "react";
@@ -17,6 +17,7 @@ import { ConeStriped } from "react-bootstrap-icons";
 import axios from "axios";
 import QuestionDetails from "../../components/QuestionDetails";
 import AddQuestion from "../../components/AddQuestion";
+import TimePicker from "../../components/TimePicker";
 
 function QuizDetailsPage() {
   const userInfo = localStorage.getItem("userInfo");
@@ -115,7 +116,7 @@ function QuizDetailsPage() {
 
   return (
     <Box m="16" id="box">
-      <Box my={8}>
+      <Box mt={8} mb={4}>
         <PDFDownloadLink
           document={
             <ResponsePdf report={report} subjectName={quizDetails.name} />
@@ -132,11 +133,20 @@ function QuizDetailsPage() {
         </PDFDownloadLink>
       </Box>
 
-      <Button onClick={sendMails} className="sendMail" colorScheme="telegram">
+      <Divider mb={2} />
+
+      <Button
+        onClick={sendMails}
+        className="sendMail"
+        colorScheme="telegram"
+        mb={4}
+      >
         Send Mails to Everyone for the test
       </Button>
 
-      <div style={{ marginTop: "40px" }}>
+      <Divider mb={8} />
+
+      <div style={{ marginTop: "20px" }}>
         <h2>Make the quiz private</h2>
         <Button my={6} onClick={() => onPriveteClick(true)}>
           Yes
@@ -145,12 +155,21 @@ function QuizDetailsPage() {
           No
         </Button>
       </div>
-      <Box mt={8}>
+
+      <Divider my={3} />
+      <Box mt={4}>
         <QuestionDetails id={quizDetails._id} token={userData.token} />
       </Box>
 
       <Box mx={4}>
         <AddQuestion
+          id={quizDetails._id}
+          token={userData.token}
+          userId={userData?._id}
+        />
+      </Box>
+      <Box mx={4}>
+        <TimePicker
           id={quizDetails._id}
           token={userData.token}
           userId={userData?._id}

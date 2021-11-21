@@ -23,6 +23,18 @@ const quizSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    isTimedQuiz: {
+      type: Boolean,
+      default: false,
+    },
+    startTime: {
+      type: Date,
+      default: new Date(0),
+    },
+    endTime: {
+      type: Date,
+      default: new Date(8640000000000000),
+    },
     // createdAt: {
     //   type: String,
     //   default: Date.now(),

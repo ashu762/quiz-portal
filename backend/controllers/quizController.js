@@ -9,8 +9,19 @@ import { sendMails } from "../config/nodeMailer.js";
 // @route GEt /api/quiz
 // @access public
 export const postQuiz = asyncHandler(async (req, res) => {
-  const { name, author, user, description, isPrivate } = req.body;
+  const {
+    name,
+    author,
+    user,
+    description,
+    isPrivate,
+    isTimedQuiz,
+    startTime,
+    endTime,
+  } = req.body;
+
   const createdAt = Date.now();
+
   const quiz = await Quiz.create({
     name,
     author,
@@ -18,6 +29,9 @@ export const postQuiz = asyncHandler(async (req, res) => {
     description,
     createdAt,
     isPrivate,
+    isTimedQuiz,
+    startTime,
+    endTime,
   });
   if (quiz) {
     res.status(200).json({
@@ -42,6 +56,16 @@ export const getQuizById = asyncHandler(async (req, res) => {
   const questions = await Question.find({ quizName: req.params.id });
   if (questions) {
     res.status(200).json(questions);
+  } else {
+    res.status(400);
+    throw new Error("Quiz Not found!!");
+  }
+});
+
+export const getQuizDataById = asyncHandler(async (req, res) => {
+  const quiz = await Quiz.findById(req.params.id);
+  if (quiz) {
+    res.status(200).json(quiz);
   } else {
     res.status(400);
     throw new Error("Quiz Not found!!");
@@ -129,6 +153,26 @@ export const updateQuiz = asyncHandler(async (req, res) => {
   const quiz = await Quiz.findById(req.params.id);
 
   quiz.isPrivate = isPrivate;
+  if (quiz) {
+    const updatedQuiz = await quiz.save();
+
+    res.status(200).json({
+      updatedQuiz,
+      success: true,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Quiz Creation unsuccessful");
+  }
+});
+
+export const updateTimedQuiz = asyncHandler(async (req, res) => {
+  const { isTimedQuiz, startTime, endTime } = req.body;
+  const quiz = await Quiz.findById(req.params.id);
+
+  quiz.isTimedQuiz = isTimedQuiz;
+  quiz.startTime = startTime;
+  quiz.endTime = endTime;
   if (quiz) {
     const updatedQuiz = await quiz.save();
 
